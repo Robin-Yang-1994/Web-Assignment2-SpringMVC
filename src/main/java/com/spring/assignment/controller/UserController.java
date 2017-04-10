@@ -1,6 +1,8 @@
 package com.spring.assignment.controller;
 
 import com.spring.assignment.Anime.User;
+import com.spring.assignment.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
+    @Autowired
+    UserService userService;
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerView(Model model){
@@ -21,9 +25,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    @ResponseBody
     public String register(Model model, @ModelAttribute("User")User user){
 
-        return "Register complete" + " " + user.getFname()+ " " +user.getLname();
+        userService.save(user);
+        return "redirect:/";
+        //return "Registration complete and user has been added to data base. New user is " + user.getFname()+ " " +user.getLname();
     }
 }

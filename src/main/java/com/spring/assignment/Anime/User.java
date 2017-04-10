@@ -1,9 +1,24 @@
 package com.spring.assignment.Anime;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * Created by web on 10/04/17.
  */
+@Entity
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
+
+    String fname;
+    String lname;
+    String email;
+    String password;
 
     public String getFname() {
         return fname;
@@ -36,9 +51,12 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+    public Long getId() {
+        return id;
+    }
 
-    String fname;
-    String lname;
-    String email;
-    String password;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }
