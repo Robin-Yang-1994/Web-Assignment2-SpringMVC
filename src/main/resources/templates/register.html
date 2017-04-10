@@ -7,14 +7,22 @@
 
 <h1>User Registraion</h1>
 
-<form action="#" th:action="@{/user/register}" th:object="${user}" method="post">
+<form action="#" th:action="@{/user/register}" th:object="${User}" method="post">
 
-    <p>First Name: </p> <input type="text" th:field="*{fname}"/>
-    <p>Last Name: </p> <input type="text" th:field="*{lname}"/>
-    <p>Email: </p> <input type="text" th:field="*{email}"/>
-    <p>Password: </p> <input type="text" th:field="*{password}"/>
+    <p>First Name: </p>
+    <input type="text" th:field="*{fname}"/>
 
-    <input type="submit" value="Register"/>
+    <p>Last Name: </p>
+    <input type="text" th:field="*{lname}"/>
+
+    <p>Email: </p>
+    <input type="text" th:field="*{email}"/>
+
+    <p>Password: </p>
+    <input type="text" th:field="*{password}"/>
+
+
+    <p/><input type="submit" value="Register"/>
 
 </form>
 
