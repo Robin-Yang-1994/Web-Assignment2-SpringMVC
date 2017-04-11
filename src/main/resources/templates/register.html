@@ -9,6 +9,8 @@
 
 <form action="#" th:action="@{/user/register}" th:object="${User}" method="post">
 
+    <!--<input type="hidden" th:field="*{id}"/>-->
+
     <p>First Name: </p>
     <input type="text" th:field="*{fname}"/>
 

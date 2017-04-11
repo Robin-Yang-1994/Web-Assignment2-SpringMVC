@@ -1,4 +1,4 @@
-package com.spring.assignment.Anime;
+package com.spring.assignment.domain;
 
 /**
  * Created by web on 10/04/17.
