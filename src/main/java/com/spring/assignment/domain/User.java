@@ -1,4 +1,4 @@
-package com.spring.assignment.Anime;
+package com.spring.assignment.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
