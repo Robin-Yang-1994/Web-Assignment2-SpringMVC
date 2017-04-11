@@ -13,13 +13,15 @@
         <th>Last Name</th>
         <th>Email</th>
         <th>Password</th>
-        <th>Action</th>
+        <th>Update</th>
+        <th>Delete</th>
     </tr>
     <tr th:each="user : ${users}">
         <td th:text="${user.fname}">robin</td>
         <td th:text="${user.lname}">yang</td>
         <td th:text="${user.email}">robinyang@hotmail.com</td>
         <td th:text="${user.password}">test123</td>
+        <td><a href="#" th:href="@{/user/update/}+${user.id}">Update</a></td>
         <td><a href="#" th:href="@{/user/delete/}+${user.id}">Delete</a></td>
     </tr>
 </table>
@@ -28,6 +30,7 @@
     <ol>
         <li th:each="user :${users}">
             <span th:text="${user.fname}+' '+${user.lname}+', '+${user.email}+', '+${user.password}"></span>
+            <td><a href="#" th:href="@{/user/update/}+${user.id}">Update</a></td>
             <td><a href="#" th:href="@{/user/delete/}+${user.id}">Delete</a></td>
         </li>
     </ol>
