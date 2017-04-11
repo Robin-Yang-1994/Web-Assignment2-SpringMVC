@@ -29,6 +29,20 @@ public class UserController {
         //return "Registration complete and user has been added to data base. New user is " + user.getFname()+ " " +user.getLname();
     }
 
+    @RequestMapping(value = "/update/{user}", method = RequestMethod.GET)
+    public String updateView(Model model, @PathVariable User user){ // display view for update form
+
+        model.addAttribute("User", user);
+        return "updateUser";
+    }
+
+    @RequestMapping(value = "/update/", method = RequestMethod.POST)
+    public String updateUser(Model model, @ModelAttribute User user){ // update user and redirect to view
+
+        userService.save(user);
+        return "redirect:/";
+    }
+
     @RequestMapping(value = "/delete/{user}", method = RequestMethod.GET)// define url to delete using post data from view
     public String deleteUser(@PathVariable User user){
 
@@ -36,6 +50,5 @@ public class UserController {
         userService.delete(user); // delete operation
 
         return "redirect:/";
-
     }
 }
