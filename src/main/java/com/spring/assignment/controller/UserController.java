@@ -13,18 +13,18 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @RequestMapping(value = "/register", method = RequestMethod.GET) // get user and show user
     public String registerView(Model model){
 
         User user = new User();
-        model.addAttribute("User", user);
+        model.addAttribute("User", user); // uses model
         return "register";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST) // data passed from form using post
     public String register(Model model, @ModelAttribute("User")User user){
 
-        userService.save(user);
+        userService.save(user); // saves into database
         return "redirect:/";
         //return "Registration complete and user has been added to data base. New user is " + user.getFname()+ " " +user.getLname();
     }
@@ -36,19 +36,18 @@ public class UserController {
         return "updateUser";
     }
 
-    @RequestMapping(value = "/update/", method = RequestMethod.POST)
+    @RequestMapping(value = "/update/", method = RequestMethod.POST) // get data from form via post
     public String updateUser(Model model, @ModelAttribute User user){ // update user and redirect to view
 
-        userService.save(user);
+        userService.save(user); // over write data in database
         return "redirect:/";
     }
 
     @RequestMapping(value = "/delete/{user}", method = RequestMethod.GET)// define url to delete using post data from view
     public String deleteUser(@PathVariable User user){
 
-        String name = user.getFname()+" "+user.getLname();
+//        String name = user.getFname()+" "+user.getLname();
         userService.delete(user); // delete operation
-
         return "redirect:/";
     }
 }

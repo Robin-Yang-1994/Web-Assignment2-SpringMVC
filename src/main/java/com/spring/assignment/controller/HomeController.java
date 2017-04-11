@@ -26,7 +26,7 @@ public class HomeController {
 //        animes.setGenre("Comedy");
 //        animes.setDescription("Girl trying to fight for dad");
 
-        List<User> users = userService.findAll();
+        List<User> users = userService.findAll(); // display user
 
         model.addAttribute("users", users); // use object as parameter
         return "home";

@@ -15,17 +15,17 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public User save(User u){
+    public User save(User u){ // save method
 
         return userRepository.save(u);
     }
 
-    public List<User> findAll(){
+    public List<User> findAll(){ // get all user
             //return userRepository.findByFnameAndEmailAndPassword("test","test","test");
         return userRepository.findAll();
     }
 
-    public void delete(User user){
+    public void delete(User user){ // define delete method in model
 
         userRepository.delete(user);
     }
