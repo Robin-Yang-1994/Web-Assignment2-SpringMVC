@@ -1,5 +1,7 @@
 package com.spring.assignment.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,9 +17,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
+    @NotEmpty
     String fname;
+    @NotEmpty
     String lname;
+    @NotEmpty
     String email;
+    @NotEmpty
     String password;
 
     public String getFname() {

@@ -5,7 +5,10 @@ import com.spring.assignment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -22,8 +25,14 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST) // data passed from form using post
-    public String register(Model model, @ModelAttribute("User")User user){
+    public String register(Model model, @Valid @ModelAttribute("User")User user, BindingResult bindingResult){
 
+        if(bindingResult.hasErrors())
+        {
+            model.addAttribute("user", user);
+            model.addAttribute("message", "Please fill in each field"); // sends error message as parameter
+            return "register";
+        }
         userService.save(user); // saves into database
         return "redirect:/";
         //return "Registration complete and user has been added to data base. New user is " + user.getFname()+ " " +user.getLname();
