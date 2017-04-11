@@ -5,7 +5,33 @@
 </head>
 <body>
 
-<p th:text="'Anime = ' + ${Anime.animeName} + ', ' + ${Anime.genre} + ', ' + ${Anime.description} + '.'">Anime 1</p>
+<!--<p th:text="'domain = ' + ${domain.animeName} + ', ' + ${domain.genre} + ', ' + ${domain.description} + '.'">domain 1</p>-->
+
+<table border="1px">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.fname}">robin</td>
+        <td th:text="${user.lname}">yang</td>
+        <td th:text="${user.email}">robinyang@hotmail.com</td>
+        <td th:text="${user.password}">test123</td>
+        <td><a href="#" th:href="@{/user/delete/}+${user.id}">Delete</a></td>
+    </tr>
+</table>
+
+<div>
+    <ol>
+        <li th:each="user :${users}">
+            <span th:text="${user.fname}+' '+${user.lname}+', '+${user.email}+', '+${user.password}"></span>
+            <td><a href="#" th:href="@{/user/delete/}+${user.id}">Delete</a></td>
+        </li>
+    </ol>
+</div>
 
 </body>
 </html>
