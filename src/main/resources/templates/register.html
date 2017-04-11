@@ -7,9 +7,13 @@
 
 <h1>User Registraion</h1>
 
+<div th:if="${message!=null}">
+    <span th:text="${message}"></span>
+</div>
+
 <form action="#" th:action="@{/user/register}" th:object="${User}" method="post">
 
-    <!--<input type="hidden" th:field="*{id}"/>-->
+    <input type="hidden" th:field="*{id}"/>
 
     <p>First Name: </p>
     <input type="text" th:field="*{fname}"/>
@@ -25,7 +29,6 @@
 
 
     <p/><input type="submit" value="Register"/>
-
 </form>
 
 </body>

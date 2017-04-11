@@ -1,5 +1,6 @@
 package com.spring.assignment.service;
 
+import com.spring.assignment.domain.LoginAuthentication;
 import com.spring.assignment.domain.User;
 import com.spring.assignment.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ public class UserService {
     public void delete(User user){ // define delete method in model
 
         userRepository.delete(user);
+    }
+
+    public List<User> login(LoginAuthentication user){
+
+        return userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());
     }
 
 }
