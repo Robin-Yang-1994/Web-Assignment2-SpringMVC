@@ -1,5 +1,6 @@
 package com.spring.assignment.controller;
 
+import com.spring.assignment.domain.LoginAuthentication;
 import com.spring.assignment.domain.User;
 import com.spring.assignment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,33 @@ public class UserController {
         userService.save(user); // saves into database
         return "redirect:/";
         //return "Registration complete and user has been added to data base. New user is " + user.getFname()+ " " +user.getLname();
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET) // get user and show user
+    public String loginView(Model model){
+
+        LoginAuthentication user = new LoginAuthentication();
+        model.addAttribute("User", user); // uses model
+        return "login";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST) // data passed from form using post
+    public String loginProcess(Model model, @Valid @ModelAttribute("User")LoginAuthentication user, BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()) // error check for empty fields
+        {
+            model.addAttribute("user", user);
+            model.addAttribute("message", "Please fill in each field"); // sends error message as parameter
+            return "login";
+        }
+
+        if(userService.login(user)==null || userService.login(user).size()==0) // check if there is any matching data
+        {
+            model.addAttribute("user", user);
+            model.addAttribute("message", "Your account information are does not match with the system"); // login error message
+            return "login";
+        }
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/update/{user}", method = RequestMethod.GET)
