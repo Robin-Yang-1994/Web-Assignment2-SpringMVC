@@ -70,7 +70,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET) // log out user
+    @RequestMapping(value = "/logout", method = RequestMethod.POST) // log out user
     public String logout(Model model, HttpSession session){
 
         session.removeAttribute("login");
