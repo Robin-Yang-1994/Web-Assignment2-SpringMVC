@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -48,7 +49,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST) // data passed from form using post
-    public String loginProcess(Model model, @Valid @ModelAttribute("User")LoginAuthentication user, BindingResult bindingResult){
+    public String loginProcess(Model model, @Valid @ModelAttribute("User")LoginAuthentication user, BindingResult bindingResult,
+                               HttpSession session){
 
         if(bindingResult.hasErrors()) // error check for empty fields
         {
@@ -63,7 +65,16 @@ public class UserController {
             model.addAttribute("message", "Your account information are does not match with the system"); // login error message
             return "login";
         }
+
+        session.setAttribute("login", true);
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET) // log out user
+    public String logout(Model model, HttpSession session){
+
+        session.removeAttribute("login");
+        return "redirect:/user/login";
     }
 
     @RequestMapping(value = "/update/{user}", method = RequestMethod.GET)

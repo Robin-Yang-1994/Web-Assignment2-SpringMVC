@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -18,13 +19,11 @@ public class HomeController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET) // define method type
     //@ResponseBody // use response body just ot display some text other wise it will look for a template view
-    public String index(Model model){
+    public String index(Model model, HttpSession session){
 
-//        Anime animes = new Anime(); // new object
-//
-//        animes.setAnimeName("Kill la Kill");
-//        animes.setGenre("Comedy");
-//        animes.setDescription("Girl trying to fight for dad");
+        if(session.getAttribute("login")==null){
+            return "redirect:/user/login";
+        }
         List<User> users = userService.findAll(); // display user
 
         model.addAttribute("users", users); // use object as parameter
