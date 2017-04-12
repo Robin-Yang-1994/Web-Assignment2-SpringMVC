@@ -4,6 +4,41 @@
     <title>Love Anime</title>
 </head>
 <body>
+<h1>Search Anime</h1>
+
+<div th:if="${message!=null}">
+    <span th:text="${message}"></span>
+</div>
+
+<form th:action="@{/anime/search}" th:object="${search}" method="post">
+
+    <input type="text" field="*{search.animeName}"/>
+    <input type="submit" value="submit" />
+
+</form>
+
+<!--<div>-->
+    <!--<ol>-->
+        <!--<li th:each="result : ${result}"></li>-->
+        <!--<span th:text="${result.animeName}">name</span>-->
+    <!--</ol>-->
+<!--</div>-->
+
+
+<br></br>
+<table border="1px">
+    <tr>
+        <th>Anime Name</th>
+        <th>Anime Genre</th>
+        <th>Anime Description</th>
+    </tr>
+    <tr th:each="anime : ${anime}">
+        <td th:text="${anime.animeName}">name</td>
+        <td th:text="${anime.genre}">name</td>
+        <td th:text="${anime.description}">name</td>
+    </tr>
+</table>
+<br></br>
 
 <!--<p th:text="'domain = ' + ${domain.animeName} + ', ' + ${domain.genre} + ', ' + ${domain.description} + '.'">domain 1</p>-->
 
