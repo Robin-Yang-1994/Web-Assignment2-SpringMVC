@@ -20,12 +20,11 @@ public class HomeController {
     //@ResponseBody // use response body just ot display some text other wise it will look for a template view
     public String index(Model model){
 
-//        Animes animes = new Animes(); // new object
+//        Anime animes = new Anime(); // new object
 //
 //        animes.setAnimeName("Kill la Kill");
 //        animes.setGenre("Comedy");
 //        animes.setDescription("Girl trying to fight for dad");
-
         List<User> users = userService.findAll(); // display user
 
         model.addAttribute("users", users); // use object as parameter

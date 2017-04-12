@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New Anime</title>
+</head>
+<body>
+
+<h1>Add New Anime</h1>
+
+<div th:if="${message!=null}">
+    <span th:text="${message}"></span>
+</div>
+
+<form action="#" th:action="@{/anime/addAnime}" th:object="${Anime}" method="post">
+
+    <input type="hidden" th:field="*{id}"/>
+
+    <p>Anime Name: </p>
+    <input type="text" th:field="*{animeName}"/>
+
+    <p>Anime Genre: </p>
+    <input type="text" th:field="*{genre}"/>
+
+    <p>Anime Description: </p>
+    <input type="text" th:field="*{description}"/>
+
+    <p/><input type="submit" value="Add"/>
+</form>
+
+</body>
+</html>
