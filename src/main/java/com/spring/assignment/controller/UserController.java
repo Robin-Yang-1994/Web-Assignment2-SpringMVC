@@ -59,7 +59,7 @@ public class UserController {
         {
             model.addAttribute("user", user);
             model.addAttribute("type", "warning");
-            model.addAttribute("message", "Please fill in each field"); // sends error message as parameter
+            model.addAttribute("message", "Please ensure all field is correctly entered"); // sends error message as parameter
             return "user/login";
         }
 
