@@ -1,11 +1,13 @@
 package com.spring.assignment.domain;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 
 /**
  * Created by web on 10/04/17.
@@ -17,13 +19,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @NotEmpty
+    @NotEmpty @Size(min=1, max=30)
     String fname;
-    @NotEmpty
+    @NotEmpty @Size(min=1, max=30)
     String lname;
-    @NotEmpty
+    @NotEmpty @Email
     String email;
-    @NotEmpty
+    @NotEmpty @Size(min=5, max=30)
     String password;
 
     public String getFname() {
