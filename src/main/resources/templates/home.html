@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Love Anime</title>
+    <th:block th:include="layout/header :: bootstrap"></th:block>
+    <th:block th:include="layout/header :: nav"></th:block>
+    <style>
+        body{
+            background-color: #DA70D6;
+        }
+    </style>
 </head>
 <body>
+
 <h1>Search Anime</h1>
 
 <div th:if="${message!=null}">
@@ -24,49 +31,15 @@
     <!--</ol>-->
 <!--</div>-->
 
+    <h2>Anime Name</h2>
 
-<br></br>
-<table border="1px">
-    <tr>
-        <th>Anime Name</th>
-        <th>Anime Genre</th>
-        <th>Anime Description</th>
-    </tr>
-    <tr th:each="anime : ${anime}">
-        <td th:text="${anime.animeName}">name</td>
-        <td th:text="${anime.genre}">name</td>
-        <td th:text="${anime.description}">name</td>
-    </tr>
-</table>
-<br></br>
-
-<!--<p th:text="'domain = ' + ${domain.animeName} + ', ' + ${domain.genre} + ', ' + ${domain.description} + '.'">domain 1</p>-->
-
-<table border="1px">
-    <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Password</th>
-        <th>Update</th>
-        <th>Delete</th>
-    </tr>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.fname}">robin</td>
-        <td th:text="${user.lname}">yang</td>
-        <td th:text="${user.email}">robinyang@hotmail.com</td>
-        <td th:text="${user.password}">test123</td>
-        <td><a href="#" th:href="@{/user/update/}+${user.id}">Update</a></td>
-        <td><a href="#" th:href="@{/user/delete/}+${user.id}">Delete</a></td>
-    </tr>
-</table>
-
-<div>
-    <ol>
-        <li th:each="user :${users}">
-            <span th:text="${user.fname}+' '+${user.lname}+', '+${user.email}+', '+${user.password}"></span>
-            <td><a href="#" th:href="@{/user/update/}+${user.id}">Update</a></td>
-            <td><a href="#" th:href="@{/user/delete/}+${user.id}">Delete</a></td>
+<div class="form-group">
+    <ol class="list-group">
+        <li class="list-group-item" th:each="anime : ${anime}">
+                <a href="#" th:href="@{/anime/update/}+${anime.id}" th:text="${anime.animeName}"></a>
+            <span>
+                <a href="#" th:href="@{/anime/delete/}+${anime.id}" onclick="return confirm('Are you sure?')" class="pull-right">Delete</a>
+            </span>
         </li>
     </ol>
 </div>
@@ -77,3 +50,36 @@
 
 </body>
 </html>
+
+<!--<p th:text="'domain = ' + ${domain.animeName} + ', ' + ${domain.genre} + ', ' + ${domain.description} + '.'">domain 1</p>-->
+
+<!--<table border="1px">-->
+    <!--<tr>-->
+        <!--<th>First Name</th>-->
+        <!--<th>Last Name</th>-->
+        <!--<th>Email</th>-->
+        <!--<th>Password</th>-->
+        <!--<th>Update</th>-->
+        <!--<th>Delete</th>-->
+    <!--</tr>-->
+    <!--<tr th:each="user : ${users}">-->
+        <!--<td th:text="${user.fname}">robin</td>-->
+        <!--<td th:text="${user.lname}">yang</td>-->
+        <!--<td th:text="${user.email}">robinyang@hotmail.com</td>-->
+        <!--<td th:text="${user.password}">test123</td>-->
+        <!--<td><a href="#" th:href="@{/user/update/}+${user.id}">Update</a></td>-->
+        <!--<td><a href="#" th:href="@{/user/delete/}+${user.id}">Delete</a></td>-->
+    <!--</tr>-->
+<!--</table>-->
+
+<!--<div class="form-group">-->
+    <!--<ol class="list-group">-->
+        <!--<li class="list-group-item list-group-item-success" th:each="user :${users}">-->
+            <!--<span th:text="${user.fname}+' '+${user.lname}+', '+${user.email}+', '+${user.password}"></span>-->
+            <!--<span>-->
+                <!--<a href="#" th:href="@{/user/delete/}+${user.id}" class="pull-right">Delete</a>-->
+                <!--<a href="#" th:href="@{/user/update/}+${user.id}" class="pull-right">Update</a>-->
+            <!--</span>-->
+        <!--</li>-->
+    <!--</ol>-->
+<!--</div>-->

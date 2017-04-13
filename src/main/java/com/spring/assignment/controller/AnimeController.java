@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -23,13 +24,13 @@ public class AnimeController {
     @Autowired
     AnimeService animeService;
 
-    @RequestMapping(value = "/show", method = RequestMethod.GET) // define method type
-    public String showAnime(Model model){
-
-        List<Anime> anime = animeService.findAll(); // display user
-        model.addAttribute("anime", anime); // use object as parameter
-        return "home";
-    }
+//    @RequestMapping(value = "/show", method = RequestMethod.GET) // define method type
+//    public String showAnime(Model model){
+//
+//        List<Anime> anime = animeService.findAll(); // display user
+//        model.addAttribute("anime", anime); // use object as parameter
+//        return "home";
+//    }
 
     @RequestMapping(value = "/addAnime", method = RequestMethod.GET) // get user and show user
     public String AddAnimeView(Model model){
@@ -67,6 +68,28 @@ public class AnimeController {
         List<Anime> result = animeService.searchAnime(aSearch);
         model.addAttribute("aSearch", aSearch);
         model.addAttribute("result", result);
+        return "home";
+    }
+
+    @RequestMapping(value = "/update/{anime}", method = RequestMethod.GET)
+    public String updateView(Model model, @PathVariable Anime anime){ // display view for update form
+
+        model.addAttribute("Anime", anime);
+        return "/anime/updateAnime";
+    }
+
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST) // get data from form via post
+    public String updateAnime(Model model, @ModelAttribute Anime anime){ // update user and redirect to view
+
+        animeService.save(anime); // over write data in database
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/delete/{anime}", method = RequestMethod.GET)// define url to delete using post data from view
+    public String deleteAnime(@PathVariable Anime anime){
+
+        animeService.delete(anime); // delete operation
         return "redirect:/";
     }
 

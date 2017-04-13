@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="layout/header :: bootstrap"></th:block>
+    <th:block th:include="layout/header :: nav"></th:block>
+    <style>
+        body{
+            background-color: #DA70D6;
+        }
+    </style>
+</head>
+<body>
+
+<div align="center" class="form-group">
+
+<h1>Update Account Information</h1>
+
+<form action="#" th:action="@{/user/update}" th:object="${User}" method="post">
+
+    <input type="hidden" th:field="*{id}"/>
+
+    <p>First Name: </p>
+    <input type="text" th:field="*{fname}"/>
+
+    <p>Last Name: </p>
+    <input type="text" th:field="*{lname}"/>
+
+    <p>Email: </p>
+    <input type="text" th:field="*{email}"/>
+
+    <p>Password: </p>
+    <input type="text" th:field="*{password}"/>
+
+
+    <p/><input type="submit" value="Update"/>
+
+</form>
+</div>
+</body>
+</html>

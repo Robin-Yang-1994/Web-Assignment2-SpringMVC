@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="layout/header :: bootstrap"></th:block>
+    <th:block th:include="layout/header :: nav"></th:block>
+    <style>
+        body{
+            background-color: #DA70D6;
+        }
+    </style>
+</head>
+<body>
+<div align="center" class="form-group">
+<h1>Update Anime Information</h1>
+
+<form action="#" th:action="@{/anime/update}" th:object="${Anime}" method="post">
+
+    <input type="hidden" th:field="*{id}" />
+
+    <p>Anime Name: </p>
+    <input type="text" th:field="*{animeName}" />
+
+    <p>Genre: </p>
+    <input type="text" th:field="*{genre}" />
+
+    <p>Description: </p>
+    <textarea type="text" th:field="*{description}"/>
+
+    <p/><input type="submit" value="Update"/>
+</form>
+</div>
+</body>
+</html>

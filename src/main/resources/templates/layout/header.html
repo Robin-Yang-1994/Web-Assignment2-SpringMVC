@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="bootstrap">
+    <title>Love Anime</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</div>
+
+<div th:fragment="header">
+        <a th:href="@{/}">Love Anime</a>
+        <ul>
+            <li><a th:href="@{/user/register}">Register</a></li>
+            <li><a th:href="@{/user/login}">Login</a></li>
+        </ul>
+</div>
+
+<div th:fragment="nav">
+    <div class="navigation">
+        <ul>
+            <li><a th:href="@{/}">Love Anime</a></li>
+            <li><a th:href="@{/anime/addAnime}">Add Anime</a></li>
+        </ul>
+    </div>
+</div>
+
+
+</html>
