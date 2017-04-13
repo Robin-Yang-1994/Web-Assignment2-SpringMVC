@@ -1,6 +1,8 @@
 package com.spring.assignment.controller;
 
+import com.spring.assignment.domain.Anime;
 import com.spring.assignment.domain.User;
+import com.spring.assignment.service.AnimeService;
 import com.spring.assignment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,19 +17,19 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-    UserService userService;
+    AnimeService animeService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET) // define method type
-    //@ResponseBody // use response body just ot display some text other wise it will look for a template view
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model, HttpSession session){
 
         if(session.getAttribute("login")==null){
             return "redirect:/user/login";
         }
-        List<User> users = userService.findAll(); // display user
+        List<Anime> anime = animeService.findAll(); // display user
 
-        model.addAttribute("users", users); // use object as parameter
+        model.addAttribute("anime", anime); // use object as parameter
         return "home";
     }
 
 }
+

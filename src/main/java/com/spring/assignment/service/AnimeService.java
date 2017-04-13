@@ -32,8 +32,13 @@ public class AnimeService {
 
             return animeRepository.findAll();
         }
-
         return animeRepository.searchAnime(anime.getAnimeName());
     }
+
+    public void delete(Anime anime){ // define delete method in model
+
+        animeRepository.delete(anime);
+    }
+
 
 }

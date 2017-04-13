@@ -23,7 +23,7 @@ public class UserController {
 
         User user = new User();
         model.addAttribute("User", user); // uses model
-        return "register";
+        return "user/register";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST) // data passed from form using post
@@ -32,11 +32,14 @@ public class UserController {
         if(bindingResult.hasErrors())
         {
             model.addAttribute("user", user);
+            model.addAttribute("type", "warning");
             model.addAttribute("message", "Please fill in each field"); // sends error message as parameter
-            return "register";
+            return "user/register";
         }
         userService.save(user); // saves into database
-        return "redirect:/";
+        model.addAttribute("type", "success");
+        model.addAttribute("message", "Congratulations, You have successfully created your account at Love Anime. Please signin.");
+        return "user/login";
         //return "Registration complete and user has been added to data base. New user is " + user.getFname()+ " " +user.getLname();
     }
 
@@ -45,7 +48,7 @@ public class UserController {
 
         LoginAuthentication user = new LoginAuthentication();
         model.addAttribute("User", user); // uses model
-        return "login";
+        return "user/login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST) // data passed from form using post
@@ -55,22 +58,24 @@ public class UserController {
         if(bindingResult.hasErrors()) // error check for empty fields
         {
             model.addAttribute("user", user);
+            model.addAttribute("type", "warning");
             model.addAttribute("message", "Please fill in each field"); // sends error message as parameter
-            return "login";
+            return "user/login";
         }
 
         if(userService.login(user)==null || userService.login(user).size()==0) // check if there is any matching data
         {
             model.addAttribute("user", user);
+            model.addAttribute("type", "danger");
             model.addAttribute("message", "Your account information are does not match with the system"); // login error message
-            return "login";
+            return "user/login";
         }
 
         session.setAttribute("login", true);
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.POST) // log out user
+    @RequestMapping(value = "/logout", method = RequestMethod.POST) // log out user 
     public String logout(Model model, HttpSession session){
 
         session.removeAttribute("login");
@@ -81,7 +86,7 @@ public class UserController {
     public String updateView(Model model, @PathVariable User user){ // display view for update form
 
         model.addAttribute("User", user);
-        return "updateUser";
+        return "/user/updateUser";
     }
 
     @RequestMapping(value = "/update/", method = RequestMethod.POST) // get data from form via post

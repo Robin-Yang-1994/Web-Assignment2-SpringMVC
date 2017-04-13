@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="alert (type, message)">
+    <div class="alert alert-dismissable" th:classappend="'alert-'+${type}">
+        <span th:text="${message}" />
+    </div>
+</div>
+
+</html>

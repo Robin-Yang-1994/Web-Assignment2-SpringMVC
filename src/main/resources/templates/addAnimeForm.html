@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>New Anime</title>
+    <th:block th:include="layout/header :: nav"></th:block>
+    <th:block th:include="layout/header :: bootstrap"></th:block>
+    <style>
+        body{
+            background-color: #DA70D6;
+        }
+    </style>
 </head>
 <body>
+
+<div align="center" class="form-group">
 
 <h1>Add New Anime</h1>
 
@@ -26,6 +34,8 @@
 
     <p/><input type="submit" value="Add"/>
 </form>
+
+</div>
 
 </body>
 </html>
