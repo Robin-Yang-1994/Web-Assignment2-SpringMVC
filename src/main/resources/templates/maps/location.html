@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="layout/header :: nav"></th:block>
+    <th:block th:include="layout/header :: bootstrap"></th:block>
+    <link href="../static/css/bootstrap.min.css" />
+    <title>My Current Location</title>
+    <style>
+        /* style for the maps*/
+        #map {
+            height: 90%;
+        }
+
+        html, body {
+            height: 90%;
+            margin: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<script>
+
+    var map, infoWindow;  <!-- new maps variable -->
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: -34.397, lng: 150.644},
+            zoom: 15 // zoom in size for current location
+        });
+        infoWindow = new google.maps.InfoWindow;
+
+        // HTML5 geolocation.
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var pos = {  // get current location
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                infoWindow.setPosition(pos);
+                infoWindow.setContent('My Current Location'); // pin point label
+                infoWindow.open(map);
+                map.setCenter(pos);  // center current location
+            }, function() {
+                handleLocationError(true, infoWindow, map.getCenter()); // show maps
+            });
+        } else {
+            handleLocationError(false, infoWindow, map.getCenter()); // broswer does not support geolocation
+        }
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+            'Error: The Geolocation service failed.' :
+            'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCH6u6sjlhNPgX-9QBeNveNftU-u39E42o&amp;callback=initMap"></script>
+
+<!-- in the script for google maps, the & symbol must add 'amp;' for thyme leaf access -->
+
+</body>
+
+</html>
