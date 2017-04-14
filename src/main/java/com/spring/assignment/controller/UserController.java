@@ -72,7 +72,9 @@ public class UserController {
         }
 
         session.setAttribute("login", true);
-        return "redirect:/";
+        //String name = user.getFname();
+//        model.addAttribute("Auth", "Username is " + user.getFname()); // uses model
+        return "home";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST) // log out user 
