@@ -50,7 +50,7 @@ public class AnimeController {
             return "addAnimeForm";
         }
         animeService.save(anime); // saves into database
-        return "redirect:/anime/show";
+        return "redirect:/";
         //return "Registration complete and user has been added to data base. New user is " + user.getFname()+ " " +user.getLname();
     }
 
