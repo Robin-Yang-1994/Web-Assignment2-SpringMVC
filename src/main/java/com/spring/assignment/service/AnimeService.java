@@ -28,10 +28,6 @@ public class AnimeService {
 
     public List<Anime> searchAnime(AnimeSearch anime){
 
-        if(anime.getAnimeName().isEmpty()){
-
-            return animeRepository.findAll();
-        }
         return animeRepository.searchAnime(anime.getAnimeName());
     }
 
