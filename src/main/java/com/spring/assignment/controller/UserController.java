@@ -33,7 +33,7 @@ public class UserController {
         {
             model.addAttribute("user", user);
             model.addAttribute("type", "warning");
-            model.addAttribute("message", "Please fill in each field"); // sends error message as parameter
+            model.addAttribute("message", "Please fill in all fields"); // sends error message as parameter
             return "user/register";
         }
         userService.save(user); // saves into database
@@ -59,7 +59,7 @@ public class UserController {
         {
             model.addAttribute("user", user);
             model.addAttribute("type", "warning");
-            model.addAttribute("message", "Please ensure all field is correctly entered"); // sends error message as parameter
+            model.addAttribute("message", "Please fill in all fields"); // sends error message as parameter
             return "user/login";
         }
 
@@ -74,7 +74,7 @@ public class UserController {
         session.setAttribute("login", true);
         //String name = user.getFname();
 //        model.addAttribute("Auth", "Username is " + user.getFname()); // uses model
-        return "home";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST) // log out user 

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:include="layout/header :: nav"></th:block>
     <th:block th:include="layout/header :: bootstrap"></th:block>
+    <th:block th:include="layout/header :: nav"></th:block>
     <link href="../static/css/bootstrap.min.css" />
     <title>My Current Location</title>
     <style>
@@ -11,15 +11,13 @@
             height: 90%;
         }
 
-        html, body {
-            height: 90%;
-            margin: 10px;
-            background-color: #DA70D6;
+        html, .mapBody {
+            height: 90%; margin: 5px;
         }
     </style>
 </head>
 
-<body>
+<body class="mapBody">
 
 <div id="map"></div>
 

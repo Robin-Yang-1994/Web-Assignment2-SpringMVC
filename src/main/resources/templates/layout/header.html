@@ -9,20 +9,71 @@
 </div>
 
 <div th:fragment="header">
-        <a th:href="@{/}">Love Anime</a>
+    <style>
+        body{
+            background-color: #DA70D6;
+        }
+
+        .loginNav ul {
+            overflow: hidden;background-color: white;
+            list-style: none;text-align: center;
+        }
+
+        .loginNav li{
+            display: inline;
+        }
+
+        .loginNav a{
+            color: #DA70D6; text-align: center;
+            text-decoration: none; display: inline-block; padding: 10px;
+        }
+
+        .loginNav a:hover{
+            text-decoration: underline;
+        }
+    </style>
+    <div class="loginNav">
         <ul>
-            <li><a th:href="@{/user/register}">Register</a></li>
+            <li><a th:href="@{/}">Love Anime</a></li>
             <li><a th:href="@{/user/login}">Login</a></li>
+            <li><a th:href="@{/user/register}">Register</a></li>
         </ul>
+     </div>
 </div>
 
 <div th:fragment="nav">
+    <style>
+        body{
+            background-color: #DA70D6;
+        }
+
+        .navigation ul {
+            overflow: hidden;background-color: white;
+            list-style: none;text-align: center;
+        }
+
+        .navigation li{
+            display: inline;
+        }
+
+        .navigation a{
+            color: #DA70D6; text-align: center;
+            text-decoration: none; display: inline-block; padding: 10px;
+        }
+
+        .navigation a:hover{
+            text-decoration: underline;
+        }
+
+    </style>
     <div class="navigation">
         <ul>
             <li><a th:href="@{/}">Love Anime</a></li>
             <li><a th:href="@{/user/update}">My Profile</a></li>
             <li><a th:href="@{/anime/addAnime}">Add Anime</a></li>
             <li><a th:href="@{/maps/show}">See Myself in Maps</a></li>
+            <li><a><form th:action="@{/user/logout}" method="post">
+                <input type="submit" value="Logout" /></form></a></li>
         </ul>
     </div>
 </div>
