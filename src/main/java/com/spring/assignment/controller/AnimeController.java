@@ -55,20 +55,21 @@ public class AnimeController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET) // define method type
-    public String sAnime(Model model){
+    public String searchAnimeForm(Model model){
 
-        AnimeSearch anime = new AnimeSearch(); // display user
-        model.addAttribute("anime", anime); // use object as parameter
-        return "home";
+        AnimeSearch searchForm = new AnimeSearch(); // display user
+        model.addAttribute("search", searchForm); // use object as parameter
+        return "/anime/searchAnimeForm";
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST) // define method type
-    public String searchAnimeForm(Model model, @ModelAttribute("search")AnimeSearch aSearch){
+    public String searchAnime(Model model, @ModelAttribute("search")AnimeSearch searchForm){
 
-        List<Anime> result = animeService.searchAnime(aSearch);
-        model.addAttribute("aSearch", aSearch);
-        model.addAttribute("result", result);
-        return "home";
+        List<Anime> anime = animeService.searchAnime(searchForm);
+        long count = anime.size();
+        model.addAttribute("anime", anime);
+        model.addAttribute("count", count);
+        return "/anime/searchAnimeForm";
     }
 
     @RequestMapping(value = "/update/{anime}", method = RequestMethod.GET)

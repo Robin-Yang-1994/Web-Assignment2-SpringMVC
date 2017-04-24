@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AnimeRepository extends JpaRepository<Anime, Long> {
 
-    @Query("SELECT a FROM Anime a Where a.animeName Like ?1")
+    @Query("SELECT anime FROM Anime anime Where lower(anime.animeName) Like %?1%")
     List<Anime> searchAnime(String animeName);
 }
 

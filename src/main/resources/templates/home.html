@@ -10,23 +10,6 @@
     <!--<p th:text="${Auth}"></p>-->
 <!--</div>-->
 
-<h1 align="center">Search Anime</h1>
-    <div th:if="${message!=null}">
-        <span th:align="center" th:text="${message}"></span>
-    </div>
-
-<form th:align="center" th:action="@{/anime/search}" th:object="${search}" method="post">
-    <input type="text" field="*{search.animeName}"/>
-    <input type="submit" value="submit" />
-</form>
-
-<!--<div>-->
-    <!--<ol>-->
-        <!--<li th:each="result : ${result}"></li>-->
-        <!--<span th:text="${result.animeName}">name</span>-->
-    <!--</ol>-->
-<!--</div>-->
-
 <h1 align="center">Anime List</h1>
 <div class="form-group col-md-6 col-md-offset-3">
     <ol class="list-group">
