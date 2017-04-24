@@ -2,27 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="layout/header :: bootstrap"></th:block>
+    <th:block th:include="layout/header :: header"></th:block>
     <link href="../static/css/bootstrap.min.css" />
-    <style>
-        body{
-            background-color: #DA70D6;
-        }
-    </style>
 </head>
 <body>
 
-<div th:include="layout/header :: header"></div> <!-- file name then fragment -->
-
-<h1>User Registraion</h1>
+<h1 align="center">User Registraion</h1>
 
 <!--<div th:if="${message!=null}">-->
     <!--<span th:text="${message}"></span>-->
 <!--</div>-->
 
-<div th:if="${type != null}" th:include="layout/alert :: alert (type=${type}, message=${message})"/>
+<div align="center" th:if="${type != null}" th:include="layout/alert :: alert (type=${type}, message=${message})"/>
 
 
-<form action="#" th:action="@{/user/register}" th:object="${User}" method="post">
+<form align="center" action="#" th:action="@{/user/register}" th:object="${User}" method="post">
 
     <input type="hidden" th:field="*{id}"/>
 

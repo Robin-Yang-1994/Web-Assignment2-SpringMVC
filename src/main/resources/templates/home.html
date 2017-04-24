@@ -3,11 +3,6 @@
 <head>
     <th:block th:include="layout/header :: bootstrap"></th:block>
     <th:block th:include="layout/header :: nav"></th:block>
-    <style>
-        body{
-            background-color: #DA70D6;
-        }
-    </style>
 </head>
 <body>
 
@@ -15,17 +10,14 @@
     <!--<p th:text="${Auth}"></p>-->
 <!--</div>-->
 
-<h1>Search Anime</h1>
+<h1 align="center">Search Anime</h1>
+    <div th:if="${message!=null}">
+        <span th:align="center" th:text="${message}"></span>
+    </div>
 
-<div th:if="${message!=null}">
-    <span th:text="${message}"></span>
-</div>
-
-<form th:action="@{/anime/search}" th:object="${search}" method="post">
-
+<form th:align="center" th:action="@{/anime/search}" th:object="${search}" method="post">
     <input type="text" field="*{search.animeName}"/>
     <input type="submit" value="submit" />
-
 </form>
 
 <!--<div>-->
@@ -35,9 +27,8 @@
     <!--</ol>-->
 <!--</div>-->
 
-    <h2>Anime Name</h2>
-
-<div class="form-group">
+<h1 align="center">Anime List</h1>
+<div class="form-group col-md-6 col-md-offset-3">
     <ol class="list-group">
         <li class="list-group-item" th:each="anime : ${anime}">
                 <a href="#" th:href="@{/anime/update/}+${anime.id}" th:text="${anime.animeName}"></a>
@@ -48,9 +39,9 @@
     </ol>
 </div>
 
-<form th:action="@{/user/logout}" method="post">
-    <input type="submit" value="Logout" />
-</form>
+<!--<form th:action="@{/user/logout}" method="post">-->
+    <!--<input type="submit" value="Logout" />-->
+<!--</form>-->
 
 </body>
 </html>
