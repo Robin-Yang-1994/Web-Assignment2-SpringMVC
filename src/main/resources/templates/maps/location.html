@@ -3,8 +3,10 @@
 <head>
     <th:block th:include="layout/header :: bootstrap"></th:block>
     <th:block th:include="layout/header :: nav"></th:block>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
     <link href="../static/css/bootstrap.min.css" />
     <title>My Current Location</title>
+
     <style>
         /* style for the maps*/
         #map {
@@ -15,6 +17,25 @@
             height: 90%; margin: 5px;
         }
     </style>
+
+<div class="weather" align="center">
+    <button class="weather" type="button" onclick="document.getElementById('weather')" id="weather">Click to View Current Weather</button>
+    <p class="weather_details"></p>
+</div>
+    <script>
+        $('#weather').click(function(e){
+            $.ajax({
+                url : "http://api.wunderground.com/api/ba9d42b25e54365a/geolookup/conditions/q/GB/Huddersfield.json",
+                dataType : "jsonp",
+                success : function(parsed_json) {
+                    var location = parsed_json['location']['city'];
+                    var temp_c = parsed_json['current_observation']['temp_c'];
+                    $('.weather_details').text("Current temperature in " + location + " is: " + temp_c + "  degrees");
+                }
+            });
+        });
+    </script>
+
 </head>
 
 <body class="mapBody">
