@@ -8,13 +8,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by web on 10/04/17.
- */
+
 @Service
 public class UserService {
+
     @Autowired
-    UserRepository userRepository;
+    UserRepository userRepository; // querying through user repository
 
     public User save(User u){ // save method
 
@@ -22,7 +21,7 @@ public class UserService {
     }
 
     public List<User> findAll(){ // get all user
-            //return userRepository.findByFnameAndEmailAndPassword("test","test","test");
+
         return userRepository.findAll();
     }
 
@@ -31,9 +30,9 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public List<User> login(LoginAuthentication user){
+    public List<User> login(LoginAuthentication user){  // login method
 
-        return userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());
+        return userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword()); // method check in user repository
     }
 
 }

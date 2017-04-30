@@ -6,10 +6,6 @@
 </head>
 <body>
 
-<!--<div th:if="${Auth!=null}">-->
-    <!--<p th:text="${Auth}"></p>-->
-<!--</div>-->
-
 <h1 align="center">Anime List</h1>
 <div class="form-group col-md-6 col-md-offset-3">
     <ol class="list-group">
@@ -22,42 +18,5 @@
     </ol>
 </div>
 
-<!--<form th:action="@{/user/logout}" method="post">-->
-    <!--<input type="submit" value="Logout" />-->
-<!--</form>-->
-
 </body>
 </html>
-
-<!--<p th:text="'domain = ' + ${domain.animeName} + ', ' + ${domain.genre} + ', ' + ${domain.description} + '.'">domain 1</p>-->
-
-<!--<table border="1px">-->
-    <!--<tr>-->
-        <!--<th>First Name</th>-->
-        <!--<th>Last Name</th>-->
-        <!--<th>Email</th>-->
-        <!--<th>Password</th>-->
-        <!--<th>Update</th>-->
-        <!--<th>Delete</th>-->
-    <!--</tr>-->
-    <!--<tr th:each="user : ${users}">-->
-        <!--<td th:text="${user.fname}">robin</td>-->
-        <!--<td th:text="${user.lname}">yang</td>-->
-        <!--<td th:text="${user.email}">robinyang@hotmail.com</td>-->
-        <!--<td th:text="${user.password}">test123</td>-->
-        <!--<td><a href="#" th:href="@{/user/update/}+${user.id}">Update</a></td>-->
-        <!--<td><a href="#" th:href="@{/user/delete/}+${user.id}">Delete</a></td>-->
-    <!--</tr>-->
-<!--</table>-->
-
-<!--<div class="form-group">-->
-    <!--<ol class="list-group">-->
-        <!--<li class="list-group-item list-group-item-success" th:each="user :${users}">-->
-            <!--<span th:text="${user.fname}+' '+${user.lname}+', '+${user.email}+', '+${user.password}"></span>-->
-            <!--<span>-->
-                <!--<a href="#" th:href="@{/user/delete/}+${user.id}" class="pull-right">Delete</a>-->
-                <!--<a href="#" th:href="@{/user/update/}+${user.id}" class="pull-right">Update</a>-->
-            <!--</span>-->
-        <!--</li>-->
-    <!--</ol>-->
-<!--</div>-->

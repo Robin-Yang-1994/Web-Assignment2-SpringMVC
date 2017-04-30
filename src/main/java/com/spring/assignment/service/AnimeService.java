@@ -8,32 +8,29 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by web on 10/04/17.
- */
 @Service
 public class AnimeService {
     @Autowired
-    AnimeRepository animeRepository;
+    AnimeRepository animeRepository;  // using anime repository for querying
 
     public Anime save(Anime a){ // save method
 
-        return animeRepository.save(a);
+        return animeRepository.save(a); // saving a results to database
     }
 
-    public List<Anime> findAll(){ // get all user
-        //return userRepository.findByFnameAndEmailAndPassword("test","test","test");
+    public List<Anime> findAll(){ // get all anime
+
         return animeRepository.findAll();
     }
 
     public List<Anime> searchAnime(AnimeSearch anime){
 
-        return animeRepository.searchAnime(anime.getAnimeName());
+        return animeRepository.searchAnime(anime.getAnimeName()); // get anime name after search
     }
 
     public void delete(Anime anime){ // define delete method in model
 
-        animeRepository.delete(anime);
+        animeRepository.delete(anime); // delete the anime data passed from controller
     }
 
 

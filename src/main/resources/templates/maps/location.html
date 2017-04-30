@@ -23,13 +23,17 @@
     <p class="weather_details"></p>
 </div>
     <script>
+        /*-- using weather api to display current weather in huddersfield*/
+        /* using javascript on click function, only load temperature if button is clicked */
         $('#weather').click(function(e){
             $.ajax({
                 url : "http://api.wunderground.com/api/ba9d42b25e54365a/geolookup/conditions/q/GB/Huddersfield.json",
                 dataType : "jsonp",
                 success : function(parsed_json) {
                     var location = parsed_json['location']['city'];
+                    /* check loacation based on url */
                     var temp_c = parsed_json['current_observation']['temp_c'];
+                    /* check temperature in degrees, instead of fahrenheits as default */
                     $('.weather_details').text("Current temperature in " + location + " is: " + temp_c + "  degrees");
                 }
             });
@@ -44,7 +48,7 @@
 
 <script>
 
-    var map, infoWindow;  <!-- new maps variable -->
+    var map, infoWindow;  <!-- new google maps variable -->
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -56,13 +60,13 @@
         // HTML5 geolocation.
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
-                var pos = {  // get current location
+                var pos = {  // get current location on latitude and longitude
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
 
                 infoWindow.setPosition(pos);
-                infoWindow.setContent('My Current Location'); // pin point label
+                infoWindow.setContent('My Current Location'); // set and pin point location with label
                 infoWindow.open(map);
                 map.setCenter(pos);  // center current location
             }, function() {

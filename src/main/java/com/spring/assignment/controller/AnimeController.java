@@ -2,9 +2,7 @@ package com.spring.assignment.controller;
 
 import com.spring.assignment.domain.Anime;
 import com.spring.assignment.domain.AnimeSearch;
-import com.spring.assignment.domain.User;
 import com.spring.assignment.service.AnimeService;
-import com.spring.assignment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,58 +15,50 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 import java.util.List;
 
-@Controller
-@RequestMapping(value = "/anime")
+@Controller // define controller
+@RequestMapping(value = "/anime")  // mapping url
 public class AnimeController {
 
     @Autowired
-    AnimeService animeService;
+    AnimeService animeService;  // using anime service via auto wire
 
-//    @RequestMapping(value = "/show", method = RequestMethod.GET) // define method type
-//    public String showAnime(Model model){
-//
-//        List<Anime> anime = animeService.findAll(); // display user
-//        model.addAttribute("anime", anime); // use object as parameter
-//        return "home";
-//    }
+    @RequestMapping(value = "/addAnime", method = RequestMethod.GET) // get add anime form
 
-    @RequestMapping(value = "/addAnime", method = RequestMethod.GET) // get user and show user
     public String AddAnimeView(Model model){
 
-        Anime anime = new Anime();
-        model.addAttribute("Anime", anime); // uses model
+        Anime anime = new Anime();  // new anime object
+        model.addAttribute("Anime", anime); // pass anime to form
         return "addAnimeForm";
     }
 
-    @RequestMapping(value = "/addAnime", method = RequestMethod.POST) // data passed from form using post
+    @RequestMapping(value = "/addAnime", method = RequestMethod.POST) // data passed to method via form method
     public String addAnime(Model model, @Valid @ModelAttribute("Anime")Anime anime, BindingResult bindingResult){
-
-        if(bindingResult.hasErrors())
+                                        // using validation and anime model
+        if(bindingResult.hasErrors()) // error finding with binding results
         {
-            model.addAttribute("Anime", anime);
-            model.addAttribute("message", "Please fill in each field"); // sends error message as parameter
+            model.addAttribute("Anime", anime); // define and pass error message to view
+            model.addAttribute("message", "Please fill in each field");
             return "addAnimeForm";
         }
-        animeService.save(anime); // saves into database
-        return "redirect:/";
-        //return "Registration complete and user has been added to data base. New user is " + user.getFname()+ " " +user.getLname();
+        animeService.save(anime); // else no error and saves into database
+        return "redirect:/"; // return home view
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.GET) // define method type
+    @RequestMapping(value = "/search", method = RequestMethod.GET) // show search form method
     public String searchAnimeForm(Model model){
 
-        AnimeSearch searchForm = new AnimeSearch(); // display user
-        model.addAttribute("search", searchForm); // use object as parameter
+        AnimeSearch searchForm = new AnimeSearch();
+        model.addAttribute("search", searchForm);
         return "/anime/searchAnimeForm";
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.POST) // define method type
+    @RequestMapping(value = "/search", method = RequestMethod.POST) // search keywords are posted via forms
     public String searchAnime(Model model, @ModelAttribute("search")AnimeSearch searchForm){
 
-        List<Anime> anime = animeService.searchAnime(searchForm);
-        long count = anime.size();
+        List<Anime> anime = animeService.searchAnime(searchForm); // list to hold all values searched in anime service method
+        long count = anime.size(); // counts returned results using list size to show amount of results founded
         model.addAttribute("anime", anime);
-        model.addAttribute("count", count);
+        model.addAttribute("count", count); // pass data to view
         return "/anime/searchAnimeForm";
     }
 
@@ -87,10 +77,10 @@ public class AnimeController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/delete/{anime}", method = RequestMethod.GET)// define url to delete using post data from view
+    @RequestMapping(value = "/delete/{anime}", method = RequestMethod.GET)// define url to delete using get data from view
     public String deleteAnime(@PathVariable Anime anime){
 
-        animeService.delete(anime); // delete operation
+        animeService.delete(anime); // get the anime from database according to the get data
         return "redirect:/";
     }
 

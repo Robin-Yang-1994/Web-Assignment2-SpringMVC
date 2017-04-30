@@ -19,15 +19,16 @@ public class HomeController {
     @Autowired
     AnimeService animeService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(Model model, HttpSession session){
+    @RequestMapping(value = "/", method = RequestMethod.GET) // default index view
 
-        if(session.getAttribute("login")==null){
+    public String index(Model model, HttpSession session){  // using sessions to only display data to logged in users
+
+        if(session.getAttribute("login")==null){  // session checking
             return "redirect:/user/login";
         }
-        List<Anime> anime = animeService.findAll(); // display user
+        List<Anime> anime = animeService.findAll(); // display all anime from anime service
 
-        model.addAttribute("anime", anime); // use object as parameter
+        model.addAttribute("anime", anime); // add object to view
         return "home";
     }
 

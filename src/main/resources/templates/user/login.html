@@ -9,10 +9,6 @@
 
 <h1 align="center">User Login</h1>
 
-<!--<div th:if="${message!=null}">-->
-    <!--<span th:text="${message}"></span>-->
-<!--</div>-->
-
 <div th:align="center" th:if="${type != null}" th:include="layout/alert :: alert (type=${type}, message=${message})"/>
 
 <form th:align="center" action="#" th:action="@{/user/login}" th:object="${User}" method="post">

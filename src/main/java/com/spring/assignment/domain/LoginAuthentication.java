@@ -9,6 +9,8 @@ import javax.persistence.Id;
  */
 public class LoginAuthentication {
 
+    // not empty validation before passing data to check user value
+
     @NotEmpty
     String email;
     @NotEmpty

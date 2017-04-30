@@ -16,16 +16,16 @@ import javax.validation.constraints.Size;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)  // auto increment user id
     Long id;
 
-    @NotEmpty @Size(min=1, max=30)
+    @NotEmpty @Size(min=1, max=30)  // not empty to all values and set string length constraints
     String fname;
     @NotEmpty @Size(min=1, max=30)
     String lname;
-    @NotEmpty @Email
+    @NotEmpty @Email // validation user email but be an email format
     String email;
-    @NotEmpty @Size(min=5, max=30)
+    @NotEmpty @Size(min=5, max=30)  // set minimum value for stronger password
     String password;
 
     public String getFname() {

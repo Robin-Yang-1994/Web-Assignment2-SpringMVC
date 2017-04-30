@@ -16,34 +16,34 @@ import javax.validation.Valid;
 @RequestMapping(value = "/user")
 public class UserController {
     @Autowired
-    UserService userService;
+    UserService userService; // data base methods are stored in user service
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET) // get user and show user
+    @RequestMapping(value = "/register", method = RequestMethod.GET) // show register form
     public String registerView(Model model){
 
         User user = new User();
-        model.addAttribute("User", user); // uses model
+        model.addAttribute("User", user);
         return "user/register";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST) // data passed from form using post
     public String register(Model model, @Valid @ModelAttribute("User")User user, BindingResult bindingResult){
-
-        if(bindingResult.hasErrors())
+        // error checking
+        if(bindingResult.hasErrors()) // if found error
         {
             model.addAttribute("user", user);
-            model.addAttribute("type", "warning");
-            model.addAttribute("message", "Please fill in all fields"); // sends error message as parameter
+            model.addAttribute("type", "warning"); // flash message using bootstrap
+            model.addAttribute("message", "Please fill in all fields correctly"); // sends error message as parameter
             return "user/register";
         }
-        userService.save(user); // saves into database
-        model.addAttribute("type", "success");
+
+        userService.save(user); // else saves into database
+        model.addAttribute("type", "success");  // flash message
         model.addAttribute("message", "Congratulations, You have successfully created your account at Love Anime. Please signin.");
         return "user/login";
-        //return "Registration complete and user has been added to data base. New user is " + user.getFname()+ " " +user.getLname();
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET) // get user and show user
+    @RequestMapping(value = "/login", method = RequestMethod.GET) // login view
     public String loginView(Model model){
 
         LoginAuthentication user = new LoginAuthentication();
@@ -58,7 +58,7 @@ public class UserController {
         if(bindingResult.hasErrors()) // error check for empty fields
         {
             model.addAttribute("user", user);
-            model.addAttribute("type", "warning");
+            model.addAttribute("type", "warning"); // flash messages
             model.addAttribute("message", "Please fill in all fields"); // sends error message as parameter
             return "user/login";
         }
@@ -71,16 +71,14 @@ public class UserController {
             return "user/login";
         }
 
-        session.setAttribute("login", true);
-        //String name = user.getFname();
-//        model.addAttribute("Auth", "Username is " + user.getFname()); // uses model
+        session.setAttribute("login", true);  // set session if no error is found and login user
         return "redirect:/";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST) // log out user 
-    public String logout(Model model, HttpSession session){
+    public String logout(Model model, HttpSession session){ // sessions
 
-        session.removeAttribute("login");
+        session.removeAttribute("login");  // remove the session set when login
         return "redirect:/user/login";
     }
 
@@ -101,7 +99,6 @@ public class UserController {
     @RequestMapping(value = "/delete/{user}", method = RequestMethod.GET)// define url to delete using post data from view
     public String deleteUser(@PathVariable User user){
 
-//        String name = user.getFname()+" "+user.getLname();
         userService.delete(user); // delete operation
         return "redirect:/";
     }

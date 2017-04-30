@@ -14,10 +14,10 @@ import javax.persistence.Id;
 public class Anime {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)  // auto increment id
     Long id;
 
-    @NotEmpty
+    @NotEmpty  // set none empty validation
     String animeName;
 
     @NotEmpty
@@ -25,6 +25,8 @@ public class Anime {
 
     @NotEmpty
     String description;
+
+    // getter and setter
 
     public String getGenre() {
         return genre;
@@ -41,7 +43,6 @@ public class Anime {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     public Long getId() {
         return id;
