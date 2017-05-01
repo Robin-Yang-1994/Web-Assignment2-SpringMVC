@@ -95,18 +95,19 @@
     {
         function showLocation(position)
         {
-            var latitude = position.coords.latitude;
+            var latitude = position.coords.latitude;  // IP define location latitude and longitude
             var longitude = position.coords.longitude;
             console.log('latitude: '+latitude);
             console.log('longitude: '+longitude);
-            var userLatLng = new google.maps.LatLng({lat: latitude, lng: longitude});
-            showMap(userLatLng);
-            addMarker(userLatLng,"Current Location");
+            var user = new google.maps.LatLng({lat: latitude, lng: longitude});
 
-            var latLng = new google.maps.LatLng({lat: 53.645711, lng: -1.778700});
+            showMap(user);
+            addMarker(user,"Current Location");
+
+            var latLng = new google.maps.LatLng({lat: 53.645711, lng: -1.778700}); // defined location
             addMarker(latLng,"Love Anime");
 
-            var distance = google.maps.geometry.spherical.computeDistanceBetween(userLatLng,latLng);
+            var distance = google.maps.geometry.spherical.computeDistanceBetween(user,latLng);
             document.getElementById("journey").innerHTML =(distance+" Metres Away From Love Anime Office");
 
         }
@@ -124,7 +125,7 @@
 
     window.addEventListener("load",init,false);
 
-    function showMap(latLng){
+    function showMap(latLng){ // views for maps with optional controls
         map = new google.maps.Map(document.getElementById('map'),
             {
                 center: latLng,
@@ -139,7 +140,7 @@
             });
     }
 
-    function addMarker(latLng, label){
+    function addMarker(latLng, label){         // create marker method
         var marker = new google.maps.Marker({
             position: latLng,
             map: map,
@@ -153,7 +154,7 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCH6u6sjlhNPgX-9QBeNveNftU-u39E42o&amp;callback=initMap"></script>
 
-<!-- in the script for google maps, the & symbol must add 'amp;' for thyme leaf access -->
+<!-- in the script urls, the & symbol must add 'amp;' for thyme leaf access -->
 
 </body>
 
