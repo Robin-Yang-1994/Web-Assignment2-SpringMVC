@@ -4,6 +4,7 @@
     <th:block th:include="layout/header :: bootstrap"></th:block>
     <th:block th:include="layout/header :: nav"></th:block>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&amp;v=3&amp;libraries=geometry"></script>
     <link href="../static/css/bootstrap.min.css" />
     <title>My Current Location</title>
 
@@ -34,7 +35,7 @@
                     /* check loacation based on url */
                     var temp_c = parsed_json['current_observation']['temp_c'];
                     /* check temperature in degrees, instead of fahrenheits as default */
-                    $('.weather_details').text("Current temperature in " + location + " is: " + temp_c + "  degrees");
+                    $('.weather_details').text("Current Temperature In " + location + " Is: " + temp_c + "  Degrees");
                 }
             });
         });
@@ -45,15 +46,20 @@
 <body class="mapBody">
 
 <div id="map"></div>
+<br></br>
+<div id="journey" align="center"></div>
 
 <script>
 
     var map, infoWindow;  <!-- new google maps variable -->
-
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: -34.397, lng: 150.644},
-            zoom: 15 // zoom in size for current location
+//
+    function initMap() {  // initialise maps
+        map = new google.maps.Map(document.getElementById('map'),
+        latlngbounds = new google.maps.LatLngBounds(),
+        distance = document.getElementById("journey"),
+        {
+//            center: {lat: -34.397, lng: 150.644},
+//            zoom: 10 // zoom in size for current location
         });
         infoWindow = new google.maps.InfoWindow;
 
@@ -65,8 +71,8 @@
                     lng: position.coords.longitude
                 };
 
-                infoWindow.setPosition(pos);
-                infoWindow.setContent('My Current Location'); // set and pin point location with label
+//                infoWindow.setPosition(pos);
+//                infoWindow.setContent('My Current Location'); // set and pin point location with label
                 infoWindow.open(map);
                 map.setCenter(pos);  // center current location
             }, function() {
@@ -83,6 +89,65 @@
             'Error: The Geolocation service failed.' :
             'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
+    }
+
+    function currentLocation() // current location method
+    {
+        function showLocation(position)
+        {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            console.log('latitude: '+latitude);
+            console.log('longitude: '+longitude);
+            var userLatLng = new google.maps.LatLng({lat: latitude, lng: longitude});
+            showMap(userLatLng);
+            addMarker(userLatLng,"Current Location");
+
+            var latLng = new google.maps.LatLng({lat: 53.645711, lng: -1.778700});
+            addMarker(latLng,"Love Anime");
+
+            var distance = google.maps.geometry.spherical.computeDistanceBetween(userLatLng,latLng);
+            document.getElementById("journey").innerHTML =(distance+" Metres Away From Love Anime Office");
+
+        }
+
+        function errorLocation(error)
+        {
+            console.log('There is an error '+error);
+        }
+        navigator.geolocation.getCurrentPosition(showLocation, errorLocation);
+    }
+
+    function init(){
+        currentLocation()
+    }
+
+    window.addEventListener("load",init,false);
+
+    function showMap(latLng){
+        map = new google.maps.Map(document.getElementById('map'),
+            {
+                center: latLng,
+                mapTypeId: google.maps.MapTypeId.MAP,
+                zoom: 12,
+                zoomControl: true,
+                streetViewControl: true,
+                streetViewControlOptions: {
+                    position: google.maps.ControlPosition.LEFT_TOP
+                },
+                fullscreenControl: true
+            });
+    }
+
+    function addMarker(latLng, label){
+        var marker = new google.maps.Marker({
+            position: latLng,
+            map: map,
+            label:label
+        });
+        latlngbounds.extend(latLng);
+        map.setCenter(latlngbounds.getCenter());
+        map.fitBounds(latlngbounds);
     }
 </script>
 
