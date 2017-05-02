@@ -1,5 +1,18 @@
 package com.spring.assignment.controller;
 import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
+import com.spring.assignment.domain.User;
+import com.spring.assignment.service.AnimeService;
+import com.spring.assignment.service.UserService;
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.builder.DynamicReports;
+import net.sf.dynamicreports.report.builder.column.Columns;
+import net.sf.dynamicreports.report.builder.component.Components;
+import net.sf.dynamicreports.report.builder.datatype.DataTypes;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.exception.DRException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,13 +21,14 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
-import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
@@ -66,5 +80,39 @@ public class ChartController {
             ex.printStackTrace();
         }
     }
+
+    @Autowired
+    AnimeService animeService;
+
+    @RequestMapping(value = "/report", method = RequestMethod.GET)
+
+    public String createReports() {
+
+            JasperReportBuilder report = DynamicReports.report(); //a new report
+
+            report.columns(
+                            Columns.column("Anime Name", "animeName", DataTypes.stringType()),  // field name referring to DB fields
+                            Columns.column("Genre", "genre", DataTypes.stringType()),
+                            Columns.column("Description", "description", DataTypes.stringType()))
+
+                    .title( // title of report
+                            Components.text("Anime Infomration").setHorizontalAlignment(HorizontalAlignment.CENTER))
+
+                    .pageFooter(Components.pageXofY()) //show page number on the page footer
+
+                    .setDataSource(animeService.findAll()); // find data using anime service
+
+            try { // try catch method for error finding
+
+                report.toPdf(new FileOutputStream("report.pdf")); //export the report to a pdf file
+            } catch (DRException e) {
+                e.printStackTrace();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            return "redirect:/";
+        }
+
 
 }
