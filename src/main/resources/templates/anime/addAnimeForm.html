@@ -24,13 +24,13 @@
     <input type="hidden" th:field="*{id}"/>
 
     <p>Anime Name: </p>
-    <input type="text" th:field="*{animeName}"/>
+    <input type="text" th:field="*{animeName}" required="required"/>
 
     <p>Anime Genre: </p>
-    <input type="text" th:field="*{genre}"/>
+    <input type="text" th:field="*{genre}" required="required"/>
 
     <p>Anime Description: </p>
-    <input type="text" th:field="*{description}"/>
+    <input type="text" th:field="*{description}" required="required"/>
 
     <p/><input type="submit" value="Add"/>
 </form>

@@ -27,13 +27,13 @@ public class AnimeController {
 
     public String AddAnimeView(Model model, HttpSession session){
 
-        if(session.getAttribute("login")==null){  // session checking
-            return "redirect:/user/login";
+        if(session.getAttribute("login")==null){  // session checking applied
+            return "redirect:/user/login"; // require user login
         }
 
         Anime anime = new Anime();  // new anime object
         model.addAttribute("Anime", anime); // pass anime to form
-        return "addAnimeForm";
+        return "/anime/addAnimeForm";
     }
 
     @RequestMapping(value = "/addAnime", method = RequestMethod.POST) // data passed to method via form method
@@ -43,7 +43,7 @@ public class AnimeController {
         {
             model.addAttribute("Anime", anime); // define and pass error message to view
             model.addAttribute("message", "Please fill in each field");
-            return "addAnimeForm";
+            return "/anime/addAnimeForm";
         }
         animeService.save(anime); // else no error and saves into database
         return "redirect:/"; // return home view

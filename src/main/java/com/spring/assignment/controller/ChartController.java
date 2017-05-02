@@ -59,20 +59,22 @@ public class ChartController {
         plot.setStartAngle(290);
         plot.setDirection(Rotation.CLOCKWISE);
         plot.setForegroundAlpha(0.5f);
-        return chart;
+        return chart; // return value
     }
 
     @RequestMapping(value = "/pie", method = RequestMethod.GET)  // displaying straight from controller without requiring a view
     public void drawPieChart(HttpServletRequest request, HttpServletResponse response) {
 
-        response.setContentType("image/png"); // represent the pie chart as an image format
+        response.setContentType("image/png"); // represent the pie chart as an image
 
         PieDataset data = createDataSet();  // instance of data
 
-        JFreeChart chart = createChart(data, "Life of an Otaku");
+        JFreeChart chart = createChart(data, "Life of an Otaku"); // create chart with data and library
 
         try {
-            ChartUtilities.writeChartAsPNG(response.getOutputStream(), chart, 1200, 600);  // fixed size chart
+            ChartUtilities.writeChartAsPNG(response.getOutputStream(), chart, 1200, 600);
+                                                                                                        // show image as PNG
+                                                                                                        // fixed size chart
                                                                                                         // try catch for error if found
             response.getOutputStream().close();
 
@@ -82,7 +84,7 @@ public class ChartController {
     }
 
     @Autowired
-    AnimeService animeService;
+    AnimeService animeService; // use anime servic for anime information
 
     @RequestMapping(value = "/report", method = RequestMethod.GET)
 
@@ -111,7 +113,7 @@ public class ChartController {
                 e.printStackTrace();
             }
 
-            return "redirect:/charts/reportDownload"; // return download method
+            return "redirect:/charts/reportDownload"; // return download method below
         }
 
     @RequestMapping(value = "/reportDownload", method = RequestMethod.GET)
@@ -119,7 +121,7 @@ public class ChartController {
 
         ServletContext context = request.getServletContext();
 
-        File report = new File("report.pdf");  // file to download
+        File report = new File("report.pdf");  // set file to download
         FileInputStream input = null; // zero input and output
         OutputStream output = null;
 

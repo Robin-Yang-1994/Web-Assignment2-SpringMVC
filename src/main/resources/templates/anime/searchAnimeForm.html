@@ -13,8 +13,8 @@
 </div>
 
 <form th:align="center" th:action="@{/anime/search}" th:object="${search}" method="post">
-    <input placeholder="Enter Keyword" type="text" th:field="*{animeName}"/>
-    <input type="submit" value="search" />
+    <input placeholder="Enter Keyword" type="text" th:field="*{animeName}" required="required"/>
+    <input type="submit" value="search"/>
 </form>
 
 <p></p>
