@@ -84,13 +84,13 @@ public class ChartController {
     }
 
     @Autowired
-    AnimeService animeService; // use anime servic for anime information
+    AnimeService animeService; // use anime service for anime information
 
     @RequestMapping(value = "/report", method = RequestMethod.GET)
 
     public String createReports() {
 
-            JasperReportBuilder report = DynamicReports.report(); //a new report
+            JasperReportBuilder report = DynamicReports.report(); //a new report object
 
             report.columns(
                             Columns.column("Anime Name", "animeName", DataTypes.stringType()),  // field name referring to DB fields

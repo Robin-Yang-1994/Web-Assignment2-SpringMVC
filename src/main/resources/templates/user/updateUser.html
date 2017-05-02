@@ -17,6 +17,8 @@
 
 <form action="#" th:action="@{/user/update}" th:object="${User}" method="post">
 
+    <!--posting database values-->
+
     <input type="hidden" th:field="*{id}"/>
 
     <p>First Name: </p>

@@ -9,9 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Size;
 
-/**
- * Created by web on 10/04/17.
- */
+
 @Entity
 public class User {
 

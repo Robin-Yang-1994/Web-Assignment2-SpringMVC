@@ -4,9 +4,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Id;
 
-/**
- * Created by web on 11/04/17.
- */
+
 public class LoginAuthentication {
 
     // not empty validation before passing data to check user value

@@ -1,8 +1,6 @@
 package com.spring.assignment.domain;
 
-/**
- * Created by web on 12/04/17.
- */
+
 public class AnimeSearch {
 
     String animeName;

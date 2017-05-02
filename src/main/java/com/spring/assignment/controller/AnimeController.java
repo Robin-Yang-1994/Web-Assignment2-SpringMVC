@@ -49,7 +49,7 @@ public class AnimeController {
         return "redirect:/"; // return home view
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.GET) // show search form method
+    @RequestMapping(value = "/search", method = RequestMethod.GET) // show search form
     public String searchAnimeForm(Model model, HttpSession session){
 
         if(session.getAttribute("login")==null){  // session checking

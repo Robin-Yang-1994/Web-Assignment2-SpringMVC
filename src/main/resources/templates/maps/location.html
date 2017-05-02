@@ -5,6 +5,7 @@
     <th:block th:include="layout/header :: nav"></th:block>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&amp;v=3&amp;libraries=geometry"></script>
+    <!--calculation api for distance checking-->
     <link href="../static/css/bootstrap.min.css" />
     <title>My Current Location</title>
 
@@ -24,7 +25,7 @@
     <p class="weather_details"></p>
 </div>
     <script>
-        /*-- using weather api to display current weather in huddersfield*/
+        /* using weather api to display current weather in huddersfield*/
         /* using javascript on click function, only load temperature if button is clicked */
         $('#weather').click(function(e){
             $.ajax({
@@ -52,7 +53,7 @@
 <script>
 
     var map, infoWindow;  <!-- new google maps variable -->
-//
+
     function initMap() {  // initialise maps
         map = new google.maps.Map(document.getElementById('map'),
         latlngbounds = new google.maps.LatLngBounds(),

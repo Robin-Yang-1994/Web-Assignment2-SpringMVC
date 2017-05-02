@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--thyme leaf xml name spaces-->
 <head>
+    <!--header layout included below-->
     <th:block th:include="layout/header :: bootstrap"></th:block>
     <th:block th:include="layout/header :: nav"></th:block>
 </head>
@@ -13,6 +15,7 @@
                 <a href="#" th:href="@{/anime/update/}+${anime.id}" th:text="${anime.animeName}"></a>
             <span>
                 <a href="#" th:href="@{/anime/delete/}+${anime.id}" onclick="return confirm('Are you sure?')" class="pull-right">Delete</a>
+                                                                 <!--delete verification-->
             </span>
         </li>
     </ol>

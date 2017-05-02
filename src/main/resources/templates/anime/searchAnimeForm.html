@@ -8,6 +8,7 @@
 <body>
 
 <h1 align="center">Search Anime</h1>
+<!--looping in spring thyne leaf-->
 <div th:if="${message!=null}">
     <span th:align="center" th:text="${message}"></span>
 </div>
@@ -20,11 +21,13 @@
 <p></p>
 
 <div class="form-group col-md-6 col-md-offset-3">
+    <!--bootstrap grid-->
     <ol class="list-group">
         <li class="list-group-item" th:align="center" th:each="anime : ${anime}">
             <a href="#" th:href="@{/anime/update/}+${anime.id}" th:text="${anime.animeName}"></a>
         </li>
     </ol>
+    <!--count object passed from controller-->
     <span class="col-md-offset-5" th:text="${count}"></span><span>:results bas been found</span>
 </div>
 
