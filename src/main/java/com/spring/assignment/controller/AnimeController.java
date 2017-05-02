@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -24,7 +25,11 @@ public class AnimeController {
 
     @RequestMapping(value = "/addAnime", method = RequestMethod.GET) // get add anime form
 
-    public String AddAnimeView(Model model){
+    public String AddAnimeView(Model model, HttpSession session){
+
+        if(session.getAttribute("login")==null){  // session checking
+            return "redirect:/user/login";
+        }
 
         Anime anime = new Anime();  // new anime object
         model.addAttribute("Anime", anime); // pass anime to form
@@ -45,7 +50,11 @@ public class AnimeController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET) // show search form method
-    public String searchAnimeForm(Model model){
+    public String searchAnimeForm(Model model, HttpSession session){
+
+        if(session.getAttribute("login")==null){  // session checking
+            return "redirect:/user/login";
+        }
 
         AnimeSearch searchForm = new AnimeSearch();
         model.addAttribute("search", searchForm);
@@ -63,7 +72,11 @@ public class AnimeController {
     }
 
     @RequestMapping(value = "/update/{anime}", method = RequestMethod.GET)
-    public String updateView(Model model, @PathVariable Anime anime){ // display view for update form
+    public String updateView(Model model, @PathVariable Anime anime, HttpSession session){ // display view for update form
+
+        if(session.getAttribute("login")==null){  // session checking
+            return "redirect:/user/login";
+        }
 
         model.addAttribute("Anime", anime);
         return "/anime/updateAnime";
