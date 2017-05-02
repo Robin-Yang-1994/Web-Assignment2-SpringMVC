@@ -1,7 +1,5 @@
 package com.spring.assignment.controller;
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
 
 import com.spring.assignment.domain.User;
 import com.spring.assignment.service.AnimeService;
@@ -14,9 +12,11 @@ import net.sf.dynamicreports.report.builder.datatype.DataTypes;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.exception.DRException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
@@ -111,8 +111,49 @@ public class ChartController {
                 e.printStackTrace();
             }
 
-            return "redirect:/";
+            return "redirect:/charts/reportDownload"; // return download method
         }
 
+    @RequestMapping(value = "/reportDownload", method = RequestMethod.GET)
+    public String downloadFiles(HttpServletRequest request, HttpServletResponse response) {
+
+        ServletContext context = request.getServletContext();
+
+        File report = new File("report.pdf");  // file to download
+        FileInputStream input = null; // zero input and output
+        OutputStream output = null;
+
+        try { // try catch
+            input = new FileInputStream(report);  // new file object for download
+
+//            response.setContentLength((int) report.length());
+            response.setContentType(context.getMimeType("report.pdf"));
+
+            // file name and header value
+            String headerKey = "Content-Disposition";
+            String headerValue = String.format("attachment; filename=\"%s",report.getName()); // file name
+            response.setHeader(headerKey, headerValue); // set value
+
+            output = response.getOutputStream(); // output file
+
+            IOUtils.copy(input, output); // make copy of output file and push download
+
+        } catch (Exception e) {  // error checking
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != input)
+                    input.close();
+                if (null != input)
+                    output.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return "redirect:/"; // return home view with file downloaded
+    }
 
 }
+
+
